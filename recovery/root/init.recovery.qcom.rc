@@ -1,0 +1,44 @@
+on fs
+    wait /dev/block/platform/soc.0/7824900.sdhci
+    symlink /dev/block/platform/soc.0/7824900.sdhci /dev/block/bootdevice
+
+    chmod 0777 /dev/vm_bms
+    chown system system /dev/vm_bms
+    chmod 0664 /dev/battery_data
+    chown system system /dev/battery_data
+
+    chown root system /sys/class/power_supply/bms/current_now
+    chown root system /sys/class/power_supply/bms/voltage_ocv
+    chown root system /sys/class/power_supply/bms/capacity
+    chown root system /sys/class/power_supply/battery/charging_enabled
+    chmod 0664 /sys/class/power_supply/bms/current_now
+    chmod 0664 /sys/class/power_supply/bms/voltage_ocv
+    chmod 0664 /sys/class/power_supply/bms/capacity
+    chmod 0664 /sys/class/power_supply/battery/charging_enabled
+	
+# needed to make qseecomd work in recovery
+    chmod 0777 /dev/qseecom
+    chown system drmrpc /dev/qseecom
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+    
+# separate copy needed to use /sbin/linker instead of /system/bin/linker
+service sbinqseecomd /sbin/qseecomd
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service bms-sh /sbin/sh /init.qcom.bms.sh
+    class main
+    user root
+    oneshot
+
+service sbinvm_bms /sbin/vm_bms
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+on property:ro.crypto.state=encrypted
+    start sbinqseecomd
