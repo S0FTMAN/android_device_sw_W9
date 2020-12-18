@@ -1,0 +1,23 @@
+# by akhil1999 TWRP-3.4.0.0
+
+/aboot			emmc	/dev/block/platform/soc.0/7824900.sdhci/by-name/aboot			
+/boot			emmc	/dev/block/platform/soc.0/7824900.sdhci/by-name/boot		flags=display="Boot";backup=1
+/cache			ext4	/dev/block/platform/soc.0/7824900.sdhci/by-name/cache		flags=display="Cache";wipeingui
+/recovery		emmc	/dev/block/platform/soc.0/7824900.sdhci/by-name/recovery	flags=display="Recovery";backup=1
+/modem 		    emmc    /dev/block/platform/soc.0/7824900.sdhci/by-name/modem		flags=display="Modem";backup=1
+/system			ext4	/dev/block/platform/soc.0/7824900.sdhci/by-name/system		flags=display="System";backup=1
+/system_image	emmc	/dev/block/platform/soc.0/7824900.sdhci/by-name/system		flags=display="System image";backup=1;flashimg=1
+/data			ext4	/dev/block/platform/soc.0/7824900.sdhci/by-name/userdata    flags=display="Data";backup=1
+/persist        ext4    /dev/block/platform/soc.0/7824900.sdhci/by-name/persist     flags=display="Persist";backup=1
+/sbl1			emmc 	/dev/block/platform/soc.0/7824900.sdhci/by-name/sbl1
+/misc           emmc    /dev/block/platform/soc.0/7824900.sdhci/by-name/misc        flags=display="Misc"
+/tz		    	emmc    /dev/block/platform/soc.0/7824900.sdhci/by-name/tz
+/rpm			emmc    /dev/block/platform/soc.0/7824900.sdhci/by-name/rpm
+/splash			emmc	/dev/block/platform/soc.0/7824900.sdhci/by-name/splash
+/sec			emmc  	/dev/block/platform/soc.0/7824900.sdhci/by-name/sec
+
+# EFS backup/restore
+/efs1		emmc	  /dev/block/platform/soc.0/7824900.sdhci/by-name/modemst1	    flags=backup=1;display="EFS"
+/efs2		emmc	  /dev/block/platform/soc.0/7824900.sdhci/by-name/modemst2	    flags=backup=1;subpartitionof=/efs1
+/efsg		emmc	  /dev/block/platform/soc.0/7824900.sdhci/by-name/fsg	        flags=backup=1;subpartitionof=/efs1
+/efsc		emmc	  /dev/block/platform/soc.0/7824900.sdhci/by-name/fsc	        flags=backup=1;subpartitionof=/efs1
